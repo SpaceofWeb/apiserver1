@@ -28,6 +28,9 @@ Route::post('/signup', 'Auth@signup');
 
 Route::post('/login', 'Auth@login');
 
+Route::post('/logout', 'Auth@logout')
+        ->middleware('apiAuth');
+
 
 
 

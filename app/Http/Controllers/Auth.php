@@ -10,6 +10,19 @@ use Illuminate\Support\Str;
 
 class Auth extends Controller
 {
+    public function logout(Request $request)
+    {
+        $token = $request->header('token');
+
+        $user = User::where('api_token', $token)->first();
+
+        $user->api_token = '';
+        $user->save();
+
+        return response()->json([], 200);
+    }
+
+
     public function login(Request $request)
     {
         $rules = [
