@@ -34,9 +34,7 @@ Route::post('/logout', 'Auth@logout')
 Route::get('/user', 'UserController@search')
         ->middleware('apiAuth');
 
-Route::post('/photo', function() {
-    //
-});
+Route::post('/photo', 'PhotoController@store');
 
 
 
