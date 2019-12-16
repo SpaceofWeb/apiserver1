@@ -31,6 +31,9 @@ Route::post('/login', 'Auth@login');
 Route::post('/logout', 'Auth@logout')
         ->middleware('apiAuth');
 
+Route::get('/user', 'UserController@search')
+        ->middleware('apiAuth');
+
 
 
 
