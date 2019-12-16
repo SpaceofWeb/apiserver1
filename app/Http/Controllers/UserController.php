@@ -9,11 +9,20 @@ class UserController extends Controller
 {
     public function search(Request $request)
     {
-        $users = User::select('id', 'name', 'email')
-            ->where('name', 'like', '%'.$request->search.'%')
-            ->get();
+        $s = explode(' ', $request->search);
 
-        return response()->json($users, 200);
+        $arr = [];
+
+        for ($i=0; $i < count($s); $i++) {
+            $users = User::select('id', 'name', 'email')
+                ->where('name', 'like', '%'.$s[$i].'%')
+                ->orWhere('email', 'like', '%'.$s[$i].'%')
+                ->get();
+
+            $arr = array_merge($arr, $users->toArray());
+        }
+
+        return response()->json($arr, 200);
     }
 
     /**
