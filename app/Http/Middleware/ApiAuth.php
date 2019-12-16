@@ -18,6 +18,13 @@ class ApiAuth
     {
         $token = $request->header('token');
 
+        if (!$token) {
+            return response()->json([
+                'message'=> 'you need authorization'
+            ], 403);
+        }
+
+
         $user = User::where('api_token', $token)->first();
 
         if (!$user) {
